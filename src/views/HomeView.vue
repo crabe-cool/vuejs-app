@@ -1,5 +1,9 @@
-<script setup></script>
+<script setup>
+import BigInput from '@/components/BigInput.vue';
+</script>
 
 <template>
-	<main></main>
+	<main>
+    <BigInput />
+  </main>
 </template>
