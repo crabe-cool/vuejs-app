@@ -1,11 +1,12 @@
 <script setup>
 import BigInput from '@/components/BigInput.vue';
 import Thread from '@/components/Thread.vue';
+import AnimatedBackground from '@/components/AnimatedBackground.vue';
 import { useMessagesStore } from '../stores/messages';
 import { io } from 'socket.io-client';
 import { nextTick, onMounted, ref } from 'vue';
 
-const socket = io(import.meta.env.VUE_APP_API_URL);
+const socket = io(import.meta.env.VITE_APP_API_URL);
 
 const messagesStore = useMessagesStore();
 
@@ -42,6 +43,7 @@ const scrollTop = () => {
 };
 
 onMounted(() => {
+	console.log(import.meta.env.VITE_APP_API_URL)
 	socket.connect();
 	socket.on('onPostedThread', (message) => {
 		messagesStore.addMessage(message);
@@ -61,6 +63,7 @@ onMounted(() => {
 
 <template>
 	<main class="w-screen h-screen flex justify-center bg-slate-100">
+		<AnimatedBackground />
 		<div class="flex flex-col gap-2 w-1/2 overflow-hidden">
 			<div class="px-4">
 				<BigInput @messageSubmit="onMessageSubmit" class="mt-64" />
