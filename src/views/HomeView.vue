@@ -3,11 +3,13 @@ import BigInput from '@/components/BigInput.vue';
 import Thread from '@/components/Thread.vue';
 import { useMessagesStore } from '../stores/messages';
 import { io } from 'socket.io-client';
-import { onMounted } from 'vue';
+import { nextTick, onMounted, ref } from 'vue';
 
 const socket = io('http://localhost:3000');
 
 const messagesStore = useMessagesStore();
+
+const threadContainer = ref(null);
 
 const onMessageSubmit = (message) => {
 	const thread = {
@@ -28,16 +30,31 @@ const onThreadReply = (...args) => {
 	socket.emit('answerThread', answer);
 };
 
+const scrollTop = () => {
+	nextTick(() => {
+		let scrollHeight = threadContainer.value.$el.scrollHeight;
+		let scrollTop = threadContainer.value.$el.scrollTop;
+		let clientHeight = threadContainer.value.$el.clientHeight;
+		if (scrollHeight + scrollTop - clientHeight < 100) {
+			threadContainer.value.$el.scrollTop = scrollHeight * -1;
+		}
+	});
+};
+
 onMounted(() => {
 	socket.connect();
 	socket.on('onPostedThread', (message) => {
 		messagesStore.addMessage(message);
+		scrollTop();
 	});
 	socket.on('onAnsweredThread', (message) => {
 		messagesStore.refreshThread(message);
 	});
 	socket.on('onConnect', (messages) => {
 		messagesStore.setMessages(messages);
+		nextTick(() => {
+			threadContainer.value.$el.scrollTop = threadContainer.value.$el.scrollHeight * -1;
+		});
 	});
 });
 </script>
@@ -49,10 +66,12 @@ onMounted(() => {
 				<BigInput @messageSubmit="onMessageSubmit" class="mt-64" />
 			</div>
 			<TransitionGroup
+				ref="threadContainer"
 				tag="div"
 				name="fade"
 				class="flex flex-col-reverse relative gap-4 overflow-auto overflow-x-hidden p-4">
 				<Thread
+					ref="thread"
 					v-for="(message, index) in messagesStore.messages"
 					:key="index"
 					:message="message"
