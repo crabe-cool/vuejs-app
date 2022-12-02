@@ -7,7 +7,7 @@
 			</div>
 			<button class="text-slate-400 text-xs" @click="toggleReply()">Reply</button>
 		</div>
-		<TransitionGroup tag="div" name="fade" class="flex flex-col-reverse relative gap-4 overflow-auto overflow-x-hidden">
+		<TransitionGroup tag="div" name="fade" class="flex flex-col relative gap-4 overflow-auto overflow-x-hidden">
 			<div v-for="(message, index) in message.messages" :key="index" class="flex flex-col border-t">
 				<span class="text-red-400 font-semibold text-xs">{{ message.author }}</span>
 				<span class="text-slate-600">{{ message.text }}</span>
