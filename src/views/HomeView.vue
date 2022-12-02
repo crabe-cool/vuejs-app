@@ -36,6 +36,9 @@ onMounted(() => {
 	socket.on('onAnsweredThread', (message) => {
 		messagesStore.refreshThread(message);
 	});
+	socket.on('onConnect', (messages) => {
+		messagesStore.setMessages(messages);
+	});
 });
 </script>
 
