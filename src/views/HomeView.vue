@@ -5,7 +5,7 @@ import { useMessagesStore } from '../stores/messages';
 import { io } from 'socket.io-client';
 import { nextTick, onMounted, ref } from 'vue';
 
-const socket = io('http://localhost:3000');
+const socket = io(import.meta.env.VUE_APP_API_URL);
 
 const messagesStore = useMessagesStore();
 
