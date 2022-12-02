@@ -1,57 +1,12 @@
-# vuejs-app
+### Context
 
-This template should help get you started developing with Vue 3 in Vite.
+Front-end projet of the Crabe Cool team for "La nuit de l'info 2022" event. It is made with Vue 3, Pinia, VueRouter and TailwindCSS.
 
-## Recommended IDE Setup
+The goal of our project was to create in one night, a place where people could chat and ask questions about life, allowing everybody to answer. The demo is available on https://crabe.cool
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+### 🚀 Project setup
+1. Add a valid `.env` file at the root of the project containing the following var
+```VUE_APP_API_URL='<backend_url>'```
+1. Run `yarn` to install locked dependencies
+1. Run `yarn dev` and attest server gets started
 
-## Customize configuration
-
-See [Vite Configuration Reference](https://vitejs.dev/config/).
-
-## Project Setup
-
-```sh
-yarn
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
-yarn dev
-```
-
-### Compile and Minify for Production
-
-```sh
-yarn build
-```
-
-### Run Unit Tests with [Vitest](https://vitest.dev/)
-
-```sh
-yarn test:unit
-```
-
-### Run End-to-End Tests with [Cypress](https://www.cypress.io/)
-
-```sh
-yarn test:e2e:dev
-```
-
-This runs the end-to-end tests against the Vite development server.
-It is much faster than the production build.
-
-But it's still recommended to test the production build with `test:e2e` before deploying (e.g. in CI environments):
-
-```sh
-yarn build
-yarn test:e2e
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-yarn lint
-```
